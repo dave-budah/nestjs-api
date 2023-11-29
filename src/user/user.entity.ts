@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { hash } from 'bcrypt';
 import { ArticleEntity } from '@app/article/article.entity';
+import { ProjectEntity } from '@app/project/project.entity';
 @Entity({ name: 'users' })
 export class UserEntity {
   @PrimaryGeneratedColumn()
@@ -39,6 +40,9 @@ export class UserEntity {
 
   @OneToMany(() => ArticleEntity, (article) => article.author)
   articles: ArticleEntity[];
+
+  @OneToMany(() => ProjectEntity, (project) => project.author)
+  projects: ProjectEntity[];
 
   @ManyToMany(() => ArticleEntity)
   @JoinTable()

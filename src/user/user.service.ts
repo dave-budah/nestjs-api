@@ -34,7 +34,7 @@ export class UserService {
     if (userByUsername) {
       errorResponse.errors['username'] = 'has already been taken';
     }
-    if (userByUsername || userByEmail) {
+    if (userByEmail || userByUsername) {
       throw new HttpException(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY);
     }
     const newUser = new UserEntity();
@@ -63,8 +63,11 @@ export class UserService {
       throw new HttpException(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-    const isPassword = await compare(loginUserDto.password, user.password);
-    if (!isPassword) {
+    const isPasswordCorrect = await compare(
+      loginUserDto.password,
+      user.password,
+    );
+    if (!isPasswordCorrect) {
       throw new HttpException(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY);
     }
     delete user.password;
