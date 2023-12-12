@@ -133,11 +133,11 @@ export class ArticleService {
       ) === -1;
 
     // Check if user hasn't favorited an article -> like
-    if (!isNotFavorited) {
+    if (isNotFavorited) {
       user.favorites.push(article);
       article.favouriteCount++;
       await this.userRepository.save(user);
-      await this.userRepository.save(article);
+      await this.articleRepository.save(article);
     }
     return article;
   }

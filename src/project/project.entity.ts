@@ -22,7 +22,10 @@ export class ProjectEntity {
   description: string;
 
   @Column()
-  link: string;
+  github: string;
+
+  @Column()
+  site: string;
 
   @Column()
   image: string;
@@ -38,6 +41,6 @@ export class ProjectEntity {
     this.updatedAt = new Date();
   }
 
-  @ManyToOne(() => UserEntity, (user) => user.articles)
+  @ManyToOne(() => UserEntity, (user) => user.articles, { eager: true })
   author: UserEntity;
 }

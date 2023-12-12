@@ -10,5 +10,7 @@ export class CreateProjectDto {
   readonly image: string;
 
   @IsNotEmpty()
-  readonly url: string;
+  readonly github: string;
+
+  readonly site: string;
 }
