@@ -1,0 +1,16 @@
+services:
+  api:
+    image: node:18.16.0
+    build: .
+    env:
+      - DATABASE_URL=DATABASE_URL
+      - NODE_ENV=NODE_ENV
+    run: |
+      sh -c "npm install && npm run start:prod"
+  database:
+    image: postgres:16
+    env:
+      - POSTGRES_USER=selvigtech
+      - POSTGRES_PASSWORD=selvigtech
+      - POSTGRES_DB=blog
+    optional: true
